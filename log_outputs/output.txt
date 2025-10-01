@@ -1,0 +1,25 @@
+Traceback (most recent call last):
+  File "/data/users/atembulk/envs/mpose/lib/python3.9/runpy.py", line 197, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/data/users/atembulk/envs/mpose/lib/python3.9/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "/data/users/atembulk/dev/megapose6d/src/megapose/scripts/run_inference_on_example.py", line 15, in <module>
+    from megapose.config import LOCAL_DATA_DIR
+  File "/data/users/atembulk/dev/megapose6d/src/megapose/config.py", line 131, in <module>
+    YCBV_OBJECT_NAMES = pd.DataFrame(YCBV_OBJECT_NAMES, columns=["label", "description"])
+  File "/data/users/atembulk/envs/mpose/lib/python3.9/site-packages/pandas/core/frame.py", line 850, in __init__
+    columns = ensure_index(columns)
+  File "/data/users/atembulk/envs/mpose/lib/python3.9/site-packages/pandas/core/indexes/base.py", line 7713, in ensure_index
+    return Index(index_like, copy=copy, tupleize_cols=False)
+  File "/data/users/atembulk/envs/mpose/lib/python3.9/site-packages/pandas/core/indexes/base.py", line 566, in __new__
+    arr = sanitize_array(data, None, dtype=dtype, copy=copy)
+  File "/data/users/atembulk/envs/mpose/lib/python3.9/site-packages/pandas/core/construction.py", line 651, in sanitize_array
+    subarr = maybe_convert_platform(data)
+  File "/data/users/atembulk/envs/mpose/lib/python3.9/site-packages/pandas/core/dtypes/cast.py", line 138, in maybe_convert_platform
+    arr = lib.maybe_convert_objects(arr)
+  File "pandas/_libs/lib.pyx", line 2555, in pandas._libs.lib.maybe_convert_objects
+TypeError: Cannot convert numpy.ndarray to numpy.ndarray
+MKL_NUM_THREADS: 1
+OMP_NUM_THREADS: 1
+CUDA_VISIBLE_DEVICES: 0
+EGL_VISIBLE_DEVICES: 0

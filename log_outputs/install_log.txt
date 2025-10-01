@@ -1,0 +1,145 @@
+2 channel Terms of Service accepted
+Channels:
+ - conda-forge
+ - pytorch
+ - anaconda
+ - defaults
+Platform: linux-64
+Collecting package metadata (repodata.json): - \ | / - \ | / - \ | done
+Solving environment: - \ | / - done
+
+
+==> WARNING: A newer version of conda exists. <==
+    current version: 25.5.1
+    latest version: 25.7.0
+
+Please update conda by running
+
+    $ conda update -n base -c defaults conda
+
+
+
+Downloading and Extracting Packages: ...working... done
+Preparing transaction: | / - \ | / - \ | / - \ done
+Verifying transaction: / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - done
+Executing transaction: | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ By downloading and using the CUDA Toolkit conda packages, you accept the terms and conditions of the CUDA End User License Agreement (EULA): https://docs.nvidia.com/cuda/eula/index.html
+
+| / - \ | / - \ By downloading and using the cuDNN conda packages, you accept the terms and conditions of the NVIDIA cuDNN EULA -
+  https://docs.nvidia.com/deeplearning/cudnn/sla/index.html
+
+| / - \ | / - \ | / Enabling nb_conda_kernels...
+CONDA_PREFIX: /data/users/atembulk/envs/mpose
+Status: enabled
+
+- \ | / - \ | / - Traceback (most recent call last):
+  File "/data/users/atembulk/envs/mpose/lib/python3.9/site-packages/jupyter_contrib_core/notebook_compat/nbextensions.py", line 6, in <module>
+    from notebook.extensions import BaseExtensionApp
+ModuleNotFoundError: No module named 'notebook.extensions'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/data/users/atembulk/envs/mpose/lib/python3.9/site-packages/jupyter_contrib_core/notebook_compat/nbextensions.py", line 10, in <module>
+    from notebook.nbextensions import BaseNBExtensionApp
+ModuleNotFoundError: No module named 'notebook.nbextensions'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+  File "/data/users/atembulk/envs/mpose/lib/python3.9/site-packages/jupyter_contrib_core/notebook_compat/nbextensions.py", line 12, in <module>
+    from ._compat.nbextensions import BaseNBExtensionApp
+  File "/data/users/atembulk/envs/mpose/lib/python3.9/site-packages/jupyter_contrib_core/notebook_compat/_compat/nbextensions.py", line 35, in <module>
+    from notebook.nbextensions import (
+ModuleNotFoundError: No module named 'notebook.nbextensions'
+
+\ | / - \ | / - \ Traceback (most recent call last):
+  File "/data/users/atembulk/envs/mpose/lib/python3.9/site-packages/jupyter_contrib_core/notebook_compat/nbextensions.py", line 6, in <module>
+    from notebook.extensions import BaseExtensionApp
+ModuleNotFoundError: No module named 'notebook.extensions'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/data/users/atembulk/envs/mpose/lib/python3.9/site-packages/jupyter_contrib_core/notebook_compat/nbextensions.py", line 10, in <module>
+    from notebook.nbextensions import BaseNBExtensionApp
+ModuleNotFoundError: No module named 'notebook.nbextensions'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+  File "/data/users/atembulk/envs/mpose/lib/python3.9/site-packages/jupyter_contrib_core/notebook_compat/nbextensions.py", line 12, in <module>
+    from ._compat.nbextensions import BaseNBExtensionApp
+  File "/data/users/atembulk/envs/mpose/lib/python3.9/site-packages/jupyter_contrib_core/notebook_compat/_compat/nbextensions.py", line 35, in <module>
+    from notebook.nbextensions import (
+ModuleNotFoundError: No module named 'notebook.nbextensions'
+
+| / - \ | / - \ | Traceback (most recent call last):
+  File "/data/users/atembulk/envs/mpose/bin/jupyter-nbextensions_configurator", line 6, in <module>
+    from jupyter_nbextensions_configurator.application import main
+  File "/data/users/atembulk/envs/mpose/lib/python3.9/site-packages/jupyter_nbextensions_configurator/__init__.py", line 18, in <module>
+    from notebook.base.handlers import APIHandler, IPythonHandler
+ModuleNotFoundError: No module named 'notebook.base'
+
+/ - \ | / - \ | / - Traceback (most recent call last):
+  File "/data/users/atembulk/envs/mpose/lib/python3.9/site-packages/jupyter_contrib_core/notebook_compat/nbextensions.py", line 6, in <module>
+    from notebook.extensions import BaseExtensionApp
+ModuleNotFoundError: No module named 'notebook.extensions'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/data/users/atembulk/envs/mpose/lib/python3.9/site-packages/jupyter_contrib_core/notebook_compat/nbextensions.py", line 10, in <module>
+    from notebook.nbextensions import BaseNBExtensionApp
+ModuleNotFoundError: No module named 'notebook.nbextensions'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/data/users/atembulk/envs/mpose/bin/jupyter-contrib-nbextension", line 6, in <module>
+    from jupyter_contrib_nbextensions.application import main
+  File "/data/users/atembulk/envs/mpose/lib/python3.9/site-packages/jupyter_contrib_nbextensions/application.py", line 7, in <module>
+    from jupyter_contrib_core.notebook_compat.nbextensions import ArgumentConflict
+  File "/data/users/atembulk/envs/mpose/lib/python3.9/site-packages/jupyter_contrib_core/notebook_compat/nbextensions.py", line 12, in <module>
+    from ._compat.nbextensions import BaseNBExtensionApp
+  File "/data/users/atembulk/envs/mpose/lib/python3.9/site-packages/jupyter_contrib_core/notebook_compat/_compat/nbextensions.py", line 35, in <module>
+    from notebook.nbextensions import (
+ModuleNotFoundError: No module named 'notebook.nbextensions'
+
+\ | / - \ | / - \ | / - \ | / - \ | / - \ | done
+ERROR conda.core.link:_execute(1029): An error occurred while installing package 'conda-forge::jupyter_highlight_selected_word-0.2.0-py39hf3d152e_1005'.
+Rolling back transaction: - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ done
+
+LinkError: post-link script failed for package conda-forge::jupyter_highlight_selected_word-0.2.0-py39hf3d152e_1005
+location of failed script: /data/users/atembulk/envs/mpose/bin/.jupyter_highlight_selected_word-post-link.sh
+==> script messages <==
+Traceback (most recent call last):
+  File "/data/users/atembulk/envs/mpose/lib/python3.9/site-packages/jupyter_contrib_core/notebook_compat/nbextensions.py", line 6, in <module>
+    from notebook.extensions import BaseExtensionApp
+ModuleNotFoundError: No module named 'notebook.extensions'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/data/users/atembulk/envs/mpose/lib/python3.9/site-packages/jupyter_contrib_core/notebook_compat/nbextensions.py", line 10, in <module>
+    from notebook.nbextensions import BaseNBExtensionApp
+ModuleNotFoundError: No module named 'notebook.nbextensions'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+  File "/data/users/atembulk/envs/mpose/lib/python3.9/site-packages/jupyter_contrib_core/notebook_compat/nbextensions.py", line 12, in <module>
+    from ._compat.nbextensions import BaseNBExtensionApp
+  File "/data/users/atembulk/envs/mpose/lib/python3.9/site-packages/jupyter_contrib_core/notebook_compat/_compat/nbextensions.py", line 35, in <module>
+    from notebook.nbextensions import (
+ModuleNotFoundError: No module named 'notebook.nbextensions'
+
+==> script output <==
+stdout: 
+stderr: 
+return code: 1
+
+()
+

@@ -25,5 +25,5 @@ jobs:
           file: docker/Dockerfile
           platforms: linux/amd64
           push: true
-          tags: ghcr.io/${{ github.repository_owner }}/megapose6d:latest
+          tags: ghcr.io/coderadonis313/megapose6d:latest
 

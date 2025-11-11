@@ -1,0 +1,95 @@
+# ---- Versions (as in your original) ----
+ARG PYTORCH="1.11.0"
+ARG CUDA="11.3"
+ARG CUDNN="8"
+ARG PYTHON_VERSION=3.9
+
+# Base image (kept)
+FROM nvidia/cudagl:11.3.1-devel-ubuntu20.04
+
+# Use bash for RUN (kept/explicit)
+SHELL ["/bin/bash", "-lc"]
+
+# CHANGED: correct ENV format and add TZ (noninteractive apt)
+ENV DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC
+
+# (kept) certs + common tools
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    ca-certificates curl wget git build-essential cmake \
+    libgl1 libegl1 libxext6 libxrender1 libsm6 libglib2.0-0 \
+    vim htop xorg openbox bzip2 apt-utils \
+ && rm -rf /var/lib/apt/lists/*
+
+# (kept) disable problematic NVIDIA repo lists if present
+RUN rm -f /etc/apt/sources.list.d/cuda.list /etc/apt/sources.list.d/nvidia-ml.list || true
+
+# ------------------------------
+# CONDA (switch to Mambaforge)
+# ------------------------------
+
+# CHANGED: install Mambaforge instead of Miniconda (avoids Anaconda TOS)
+ENV CONDA_DIR=/conda
+ENV PATH=${CONDA_DIR}/bin:$PATH
+RUN curl -fsSL https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-Linux-x86_64.sh -o /tmp/mamba.sh \
+ && bash /tmp/mamba.sh -b -p ${CONDA_DIR} \
+ && rm -f /tmp/mamba.sh
+
+# CHANGED: strict priority (conda-forge first by default with Mambaforge)
+RUN conda config --system --set channel_priority strict
+
+# CHANGED: install Python in base (no TOS; no defaults)
+RUN mamba install -y -n base python=${PYTHON_VERSION} \
+ && conda clean -y --all
+
+# ------------------------------
+# PyTorch stack (cu113)
+# ------------------------------
+
+# CHANGED: install from pytorch + conda-forge only (no defaults)
+RUN mamba install -y -c pytorch -c conda-forge \
+    pytorch=${PYTORCH} torchvision=0.12.0 torchaudio=0.11.0 cudatoolkit=${CUDA} \
+ && conda clean -y --all
+
+# ------------------------------
+# Your extra Python deps (kept)
+# ------------------------------
+# (kept) specific h5py
+RUN pip install --no-cache-dir h5py==3.3.0
+
+# (kept) other libs you had via pip
+RUN pip install --no-cache-dir \
+    webdataset \
+    opencv-contrib-python \
+    roma \
+    torchgeometry \
+    probreg \
+    cupoch
+
+# (kept) tmux
+RUN apt-get update && apt-get install -y --no-install-recommends tmux \
+ && rm -rf /var/lib/apt/lists/*
+
+# ------------------------------
+# TEASER++ build (kept)
+# ------------------------------
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libeigen3-dev libboost-all-dev \
+ && rm -rf /var/lib/apt/lists/*
+
+RUN pip install --no-cache-dir open3d && \
+    mkdir -p /build && cd /build && \
+    git clone https://github.com/MIT-SPARK/TEASER-plusplus.git && \
+    cd TEASER-plusplus && mkdir -p build && cd build && \
+    cmake -DTEASERPP_PYTHON_VERSION=${PYTHON_VERSION} .. && \
+    make teaserpp_python && \
+    cd python && pip install .
+
+# ------------------------------
+# PyTorch3D (kept)
+# ------------------------------
+RUN pip install --no-cache-dir fvcore && \
+    pip install --no-index --no-cache-dir pytorch3d \
+      -f https://dl.fbaipublicfiles.com/pytorch3d/packaging/wheels/py39_cu113_pyt1110/download.html
+
+# Default workdir (kept or adjust as you like)
+WORKDIR /workspace

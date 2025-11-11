@@ -22,3 +22,4 @@ tmp/
 *tmp/
 tests.sh
 *.sif
+log_outputs/

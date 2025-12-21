@@ -39,12 +39,12 @@ def load_observation(
 ) -> Tuple[np.ndarray, Union[None, np.ndarray], CameraData]:
     camera_data = CameraData.from_json((example_dir / "camera_data.json").read_text())
 
-    rgb = np.array(Image.open(example_dir / "image_rgb.png"), dtype=np.uint8)
+    rgb = np.array(Image.open(example_dir / "image_rgb.png").convert('RGB'), dtype=np.uint8)
     assert rgb.shape[:2] == camera_data.resolution
 
     depth = None
     if load_depth:
-        depth = np.array(Image.open(example_dir / "image_depth.png"), dtype=np.float32) / 1000
+        depth = np.array(Image.open(example_dir / "image_depth.png").convert('RGB'), dtype=np.float32) / 1000
         assert depth.shape[:2] == camera_data.resolution
 
     return rgb, depth, camera_data
@@ -75,7 +75,8 @@ def load_detections(
 
 def make_object_dataset(example_dir: Path) -> RigidObjectDataset:
     rigid_objects = []
-    mesh_units = "mm"
+    mesh_units = "m"
+    # mesh_units = "mm"
     object_dirs = (example_dir / "meshes").iterdir()
     for object_dir in object_dirs:
         label = object_dir.name
@@ -156,9 +157,7 @@ def make_output_visualization(
     camera_data.TWC = Transform(np.eye(4))
     object_datas = load_object_data(example_dir / "outputs" / "object_data.json")
     object_dataset = make_object_dataset(example_dir)
-
-    fig_axis = draw_triaxis(rgb, object_datas, camera_data.K)
-    # return 
+    fig_axis = draw_triaxis(rgb, object_datas, camera_data.K) # type: ignore
     renderer = Panda3dSceneRenderer(object_dataset)
 
     camera_data, object_datas = convert_scene_observation_to_panda3d(camera_data, object_datas)

@@ -1,3 +1,7 @@
+echo "Deleting outputs & visualizations folders"
+rm -rf local_data/examples/baygon/outputs
+rm -rf local_data/examples/baygon/visualizations
+
 export PYTHONDONTWRITEBYTECODE=1
 echo "Drawing input coordinates"
 python -m megapose.scripts.run_inference_on_example baygon --vis-detections

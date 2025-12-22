@@ -75,8 +75,8 @@ def load_detections(
 
 def make_object_dataset(example_dir: Path) -> RigidObjectDataset:
     rigid_objects = []
-    mesh_units = "m"
-    # mesh_units = "mm"
+    # mesh_units = "m"
+    mesh_units = "mm"
     object_dirs = (example_dir / "meshes").iterdir()
     for object_dir in object_dirs:
         label = object_dir.name

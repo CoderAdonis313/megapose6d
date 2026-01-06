@@ -15,10 +15,11 @@ dependencies:
   - cudatoolkit==11.3.1
   - ipython
   - ipykernel
-  - jupyterlab
+  - numpy<2
+ # - jupyterlab
   - notebook
   - nb_conda_kernels
-  - jupyter_contrib_nbextensions
+ # - jupyter_contrib_nbextensions
   - pinocchio
   - rclone
   - pillow

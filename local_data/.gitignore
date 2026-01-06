@@ -1,4 +1,7 @@
 # Ignore everything in this directory
-*
-# Except this file
-!.gitignore
+blender_pbr_datasets
+debug_data
+experiments
+joblib_cache
+notebook_data
+results

@@ -141,8 +141,12 @@ def run_inference(
     pose_estimator = load_named_model(model_name, object_dataset).cuda()
 
     logger.info(f"Running inference.")
+    ######## TODO ############
     output, _ = pose_estimator.run_inference_pipeline(
-        observation, detections=detections, **model_info["inference_parameters"]
+        observation, 
+        run_detector=True, 
+        n_refiner_iterations=model_info["inference_parameters"]["n_refiner_iterations"],
+        n_pose_hypotheses=model_info["inference_parameters"].get("n_pose_hypotheses", 1),
     )
 
     save_predictions(example_dir, output)

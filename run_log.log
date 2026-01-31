@@ -1,0 +1,124 @@
+Deleting outputs & visualizations folders
+Drawing input coordinates
+
+A module that was compiled using NumPy 1.x cannot be run in
+NumPy 2.0.2 as it may crash. To support both 1.x and 2.x
+versions of NumPy, modules must be compiled with NumPy 2.0.
+Some module may need to rebuild instead e.g. with 'pybind11>=2.12'.
+
+If you are a user of the module, the easiest solution will be to
+downgrade to 'numpy<2' or try to upgrade the affected module.
+We expect that some modules will need time to support NumPy 2.
+
+Traceback (most recent call last):  File "C:\Users\temba\miniconda3\envs\mpose\lib\runpy.py", line 197, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "C:\Users\temba\miniconda3\envs\mpose\lib\runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "C:\Users\temba\dev\megapose6d\src\megapose\scripts\run_inference_on_example.py", line 16, in <module>
+    from megapose.datasets.object_dataset import RigidObject, RigidObjectDataset
+  File "C:\Users\temba\dev\megapose6d\src\megapose\datasets\object_dataset.py", line 28, in <module>
+    from megapose.lib3d.symmetries import (
+  File "C:\Users\temba\dev\megapose6d\src\megapose\lib3d\__init__.py", line 19, in <module>
+    from .transform import Transform
+  File "C:\Users\temba\dev\megapose6d\src\megapose\lib3d\transform.py", line 23, in <module>
+    import pinocchio as pin
+  File "C:\Users\temba\miniconda3\envs\mpose\lib\site-packages\pinocchio\__init__.py", line 19, in <module>
+    from .pinocchio_pywrap_default import *
+Traceback (most recent call last):
+  File "C:\Users\temba\miniconda3\envs\mpose\lib\site-packages\numpy\core\_multiarray_umath.py", line 44, in __getattr__
+    raise ImportError(msg)
+ImportError: 
+A module that was compiled using NumPy 1.x cannot be run in
+NumPy 2.0.2 as it may crash. To support both 1.x and 2.x
+versions of NumPy, modules must be compiled with NumPy 2.0.
+Some module may need to rebuild instead e.g. with 'pybind11>=2.12'.
+
+If you are a user of the module, the easiest solution will be to
+downgrade to 'numpy<2' or try to upgrade the affected module.
+We expect that some modules will need time to support NumPy 2.
+
+
+run_commands.sh: line 7:  1817 Segmentation fault      python -m megapose.scripts.run_inference_on_example baygon --vis-detections
+Successful input coordinates
+Running inference
+
+A module that was compiled using NumPy 1.x cannot be run in
+NumPy 2.0.2 as it may crash. To support both 1.x and 2.x
+versions of NumPy, modules must be compiled with NumPy 2.0.
+Some module may need to rebuild instead e.g. with 'pybind11>=2.12'.
+
+If you are a user of the module, the easiest solution will be to
+downgrade to 'numpy<2' or try to upgrade the affected module.
+We expect that some modules will need time to support NumPy 2.
+
+Traceback (most recent call last):  File "C:\Users\temba\miniconda3\envs\mpose\lib\runpy.py", line 197, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "C:\Users\temba\miniconda3\envs\mpose\lib\runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "C:\Users\temba\dev\megapose6d\src\megapose\scripts\run_inference_on_example.py", line 16, in <module>
+    from megapose.datasets.object_dataset import RigidObject, RigidObjectDataset
+  File "C:\Users\temba\dev\megapose6d\src\megapose\datasets\object_dataset.py", line 28, in <module>
+    from megapose.lib3d.symmetries import (
+  File "C:\Users\temba\dev\megapose6d\src\megapose\lib3d\__init__.py", line 19, in <module>
+    from .transform import Transform
+  File "C:\Users\temba\dev\megapose6d\src\megapose\lib3d\transform.py", line 23, in <module>
+    import pinocchio as pin
+  File "C:\Users\temba\miniconda3\envs\mpose\lib\site-packages\pinocchio\__init__.py", line 19, in <module>
+    from .pinocchio_pywrap_default import *
+Traceback (most recent call last):
+  File "C:\Users\temba\miniconda3\envs\mpose\lib\site-packages\numpy\core\_multiarray_umath.py", line 44, in __getattr__
+    raise ImportError(msg)
+ImportError: 
+A module that was compiled using NumPy 1.x cannot be run in
+NumPy 2.0.2 as it may crash. To support both 1.x and 2.x
+versions of NumPy, modules must be compiled with NumPy 2.0.
+Some module may need to rebuild instead e.g. with 'pybind11>=2.12'.
+
+If you are a user of the module, the easiest solution will be to
+downgrade to 'numpy<2' or try to upgrade the affected module.
+We expect that some modules will need time to support NumPy 2.
+
+
+run_commands.sh: line 14:  1819 Segmentation fault      python -m megapose.scripts.run_inference_on_example baygon --run-inference --model megapose-1.0-RGB
+Successful inference
+Drawing visualizations
+
+A module that was compiled using NumPy 1.x cannot be run in
+NumPy 2.0.2 as it may crash. To support both 1.x and 2.x
+versions of NumPy, modules must be compiled with NumPy 2.0.
+Some module may need to rebuild instead e.g. with 'pybind11>=2.12'.
+
+If you are a user of the module, the easiest solution will be to
+downgrade to 'numpy<2' or try to upgrade the affected module.
+We expect that some modules will need time to support NumPy 2.
+
+Traceback (most recent call last):  File "C:\Users\temba\miniconda3\envs\mpose\lib\runpy.py", line 197, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "C:\Users\temba\miniconda3\envs\mpose\lib\runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "C:\Users\temba\dev\megapose6d\src\megapose\scripts\run_inference_on_example.py", line 16, in <module>
+    from megapose.datasets.object_dataset import RigidObject, RigidObjectDataset
+  File "C:\Users\temba\dev\megapose6d\src\megapose\datasets\object_dataset.py", line 28, in <module>
+    from megapose.lib3d.symmetries import (
+  File "C:\Users\temba\dev\megapose6d\src\megapose\lib3d\__init__.py", line 19, in <module>
+    from .transform import Transform
+  File "C:\Users\temba\dev\megapose6d\src\megapose\lib3d\transform.py", line 23, in <module>
+    import pinocchio as pin
+  File "C:\Users\temba\miniconda3\envs\mpose\lib\site-packages\pinocchio\__init__.py", line 19, in <module>
+    from .pinocchio_pywrap_default import *
+Traceback (most recent call last):
+  File "C:\Users\temba\miniconda3\envs\mpose\lib\site-packages\numpy\core\_multiarray_umath.py", line 44, in __getattr__
+    raise ImportError(msg)
+ImportError: 
+A module that was compiled using NumPy 1.x cannot be run in
+NumPy 2.0.2 as it may crash. To support both 1.x and 2.x
+versions of NumPy, modules must be compiled with NumPy 2.0.
+Some module may need to rebuild instead e.g. with 'pybind11>=2.12'.
+
+If you are a user of the module, the easiest solution will be to
+downgrade to 'numpy<2' or try to upgrade the affected module.
+We expect that some modules will need time to support NumPy 2.
+
+
+run_commands.sh: line 20:  1821 Segmentation fault      python -m megapose.scripts.run_inference_on_example baygon --vis-outputs
+Successful Visualizations

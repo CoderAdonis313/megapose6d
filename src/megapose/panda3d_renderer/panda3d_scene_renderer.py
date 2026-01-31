@@ -31,6 +31,7 @@ from typing import Dict, List, Optional, Set
 # Third Party
 import numpy as np
 import panda3d as p3d
+from panda3d.core import Filename
 from direct.showbase.ShowBase import ShowBase
 from tqdm import tqdm
 
@@ -200,7 +201,10 @@ class Panda3dSceneRenderer:
         scale = asset.scaling_factor_mesh_units_to_meters * asset.scaling_factor
         y, p, r = asset.ypr_offset_deg
 
-        node = self._app.loader.load_model(str(asset.mesh_path), noCache=True)
+        # node = self._app.loader.load_model(str(asset.mesh_path), noCache=True)
+        mesh = Filename.fromOsSpecific(str(asset.mesh_path))  # converts C:\... -> C:/...
+        print('MESH: ', mesh)
+        node = self._app.loader.load_model(mesh, noCache=True)
         node.setScale(scale)
         node.setPos(0, 0, 0)
         node.setHpr(y, p, r)

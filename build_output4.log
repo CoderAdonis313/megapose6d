@@ -1,0 +1,136 @@
+INFO:__main__:Loading model megapose-1.0-RGB-multi-hypothesis.
+0:00:00.093810 - Loading model megapose-1.0-RGB-multi-hypothesis.
+INFO:__main__:Running inference.
+0:00:00.922431 - Running inference.
+Known pipe types:
+  wglGraphicsPipe
+(all display modules loaded.)
+Known pipe types:
+  wglGraphicsPipe
+(all display modules loaded.)
+Known pipe types:
+  wglGraphicsPipe
+(all display modules loaded.)
+Known pipe types:
+  wglGraphicsPipe
+(all display modules loaded.)
+:display(warning): FrameBufferProperties available less than requested.
+  requested: depth_bits=1 color_bits=3 red_bits=1 green_bits=1 blue_bits=1 alpha_bits=1 multisamples=4 back_buffers=1 force_hardware 
+  got: depth_bits=24 color_bits=24 red_bits=8 green_bits=8 blue_bits=8 alpha_bits=8 accum_bits=64 force_hardware 
+:display(warning): FrameBufferProperties available less than requested.
+  requested: depth_bits=1 color_bits=3 red_bits=1 green_bits=1 blue_bits=1 alpha_bits=1 multisamples=4 back_buffers=1 force_hardware 
+  got: depth_bits=24 color_bits=24 red_bits=8 green_bits=8 blue_bits=8 alpha_bits=8 accum_bits=64 force_hardware 
+:display(warning): FrameBufferProperties available less than requested.
+  requested: depth_bits=1 color_bits=3 red_bits=1 green_bits=1 blue_bits=1 alpha_bits=1 multisamples=4 back_buffers=1 force_hardware 
+  got: depth_bits=24 color_bits=24 red_bits=8 green_bits=8 blue_bits=8 alpha_bits=8 accum_bits=64 force_hardware 
+:display(warning): FrameBufferProperties available less than requested.
+  requested: depth_bits=1 color_bits=3 red_bits=1 green_bits=1 blue_bits=1 alpha_bits=1 multisamples=4 back_buffers=1 force_hardware 
+  got: depth_bits=24 color_bits=24 red_bits=8 green_bits=8 blue_bits=8 alpha_bits=8 accum_bits=64 force_hardware 
+:display(error): Could not get requested FrameBufferProperties; abandoning window.
+  requested: depth_bits=1 color_bits=3 red_bits=1 green_bits=1 blue_bits=1 alpha_bits=1 multisamples=4 back_buffers=1 force_hardware 
+  got: depth_bits=24 color_bits=24 red_bits=8 green_bits=8 blue_bits=8 alpha_bits=8 accum_bits=64 force_hardware 
+Process Process-2:
+Traceback (most recent call last):
+  File "C:\Users\temba\miniconda3\envs\mpose\lib\multiprocessing\process.py", line 315, in _bootstrap
+    self.run()
+  File "C:\Users\temba\miniconda3\envs\mpose\lib\multiprocessing\process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\temba\dev\megapose6d\src\megapose\panda3d_renderer\panda3d_batch_renderer.py", line 120, in worker_loop
+    renderings = renderer.render_scene(
+  File "C:\Users\temba\dev\megapose6d\src\megapose\panda3d_renderer\panda3d_scene_renderer.py", line 317, in render_scene
+    cameras = self.setup_cameras(root_node, camera_datas)
+  File "C:\Users\temba\dev\megapose6d\src\megapose\panda3d_renderer\panda3d_scene_renderer.py", line 245, in setup_cameras
+    cameras = self.get_cameras(data_cameras)
+  File "C:\Users\temba\dev\megapose6d\src\megapose\panda3d_renderer\panda3d_scene_renderer.py", line 187, in get_cameras
+    self.create_new_camera(resolution_)
+  File "C:\Users\temba\dev\megapose6d\src\megapose\panda3d_renderer\panda3d_scene_renderer.py", line 175, in create_new_camera
+    cam = Panda3dCamera.create(f"camera={idx}", resolution=resolution, app=self._app)
+  File "C:\Users\temba\dev\megapose6d\src\megapose\panda3d_renderer\types.py", line 180, in create
+    graphics_buffer.addRenderTexture(
+AttributeError: 'NoneType' object has no attribute 'addRenderTexture'
+MKL_NUM_THREADS: 1
+OMP_NUM_THREADS: 1
+CUDA_VISIBLE_DEVICES: 0
+EGL_VISIBLE_DEVICES: 0
+MESH:  /c/Users/temba/dev/megapose6d/local_data/examples/barbecue-sauce/meshes/barbecue-sauce/hope_000002.ply /c/Users/temba/dev/megapose6d/local_data/examples/barbecue-sauce/meshes/barbecue-sauce/hope_000002.ply
+:display(error): Could not get requested FrameBufferProperties; abandoning window.
+  requested: depth_bits=1 color_bits=3 red_bits=1 green_bits=1 blue_bits=1 alpha_bits=1 multisamples=4 back_buffers=1 force_hardware 
+  got: depth_bits=24 color_bits=24 red_bits=8 green_bits=8 blue_bits=8 alpha_bits=8 accum_bits=64 force_hardware 
+Process Process-4:
+Traceback (most recent call last):
+  File "C:\Users\temba\miniconda3\envs\mpose\lib\multiprocessing\process.py", line 315, in _bootstrap
+    self.run()
+  File "C:\Users\temba\miniconda3\envs\mpose\lib\multiprocessing\process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\temba\dev\megapose6d\src\megapose\panda3d_renderer\panda3d_batch_renderer.py", line 120, in worker_loop
+    renderings = renderer.render_scene(
+  File "C:\Users\temba\dev\megapose6d\src\megapose\panda3d_renderer\panda3d_scene_renderer.py", line 317, in render_scene
+    cameras = self.setup_cameras(root_node, camera_datas)
+  File "C:\Users\temba\dev\megapose6d\src\megapose\panda3d_renderer\panda3d_scene_renderer.py", line 245, in setup_cameras
+    cameras = self.get_cameras(data_cameras)
+  File "C:\Users\temba\dev\megapose6d\src\megapose\panda3d_renderer\panda3d_scene_renderer.py", line 187, in get_cameras
+    self.create_new_camera(resolution_)
+  File "C:\Users\temba\dev\megapose6d\src\megapose\panda3d_renderer\panda3d_scene_renderer.py", line 175, in create_new_camera
+    cam = Panda3dCamera.create(f"camera={idx}", resolution=resolution, app=self._app)
+  File "C:\Users\temba\dev\megapose6d\src\megapose\panda3d_renderer\types.py", line 180, in create
+    graphics_buffer.addRenderTexture(
+AttributeError: 'NoneType' object has no attribute 'addRenderTexture'
+MKL_NUM_THREADS: 1
+OMP_NUM_THREADS: 1
+CUDA_VISIBLE_DEVICES: 0
+EGL_VISIBLE_DEVICES: 0
+MESH:  /c/Users/temba/dev/megapose6d/local_data/examples/barbecue-sauce/meshes/barbecue-sauce/hope_000002.ply /c/Users/temba/dev/megapose6d/local_data/examples/barbecue-sauce/meshes/barbecue-sauce/hope_000002.ply
+:display(error): Could not get requested FrameBufferProperties; abandoning window.
+  requested: depth_bits=1 color_bits=3 red_bits=1 green_bits=1 blue_bits=1 alpha_bits=1 multisamples=4 back_buffers=1 force_hardware 
+  got: depth_bits=24 color_bits=24 red_bits=8 green_bits=8 blue_bits=8 alpha_bits=8 accum_bits=64 force_hardware 
+Process Process-1:
+Traceback (most recent call last):
+  File "C:\Users\temba\miniconda3\envs\mpose\lib\multiprocessing\process.py", line 315, in _bootstrap
+    self.run()
+  File "C:\Users\temba\miniconda3\envs\mpose\lib\multiprocessing\process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\temba\dev\megapose6d\src\megapose\panda3d_renderer\panda3d_batch_renderer.py", line 120, in worker_loop
+    renderings = renderer.render_scene(
+  File "C:\Users\temba\dev\megapose6d\src\megapose\panda3d_renderer\panda3d_scene_renderer.py", line 317, in render_scene
+    cameras = self.setup_cameras(root_node, camera_datas)
+  File "C:\Users\temba\dev\megapose6d\src\megapose\panda3d_renderer\panda3d_scene_renderer.py", line 245, in setup_cameras
+    cameras = self.get_cameras(data_cameras)
+  File "C:\Users\temba\dev\megapose6d\src\megapose\panda3d_renderer\panda3d_scene_renderer.py", line 187, in get_cameras
+    self.create_new_camera(resolution_)
+  File "C:\Users\temba\dev\megapose6d\src\megapose\panda3d_renderer\panda3d_scene_renderer.py", line 175, in create_new_camera
+    cam = Panda3dCamera.create(f"camera={idx}", resolution=resolution, app=self._app)
+  File "C:\Users\temba\dev\megapose6d\src\megapose\panda3d_renderer\types.py", line 180, in create
+    graphics_buffer.addRenderTexture(
+AttributeError: 'NoneType' object has no attribute 'addRenderTexture'
+MKL_NUM_THREADS: 1
+OMP_NUM_THREADS: 1
+CUDA_VISIBLE_DEVICES: 0
+EGL_VISIBLE_DEVICES: 0
+MESH:  /c/Users/temba/dev/megapose6d/local_data/examples/barbecue-sauce/meshes/barbecue-sauce/hope_000002.ply /c/Users/temba/dev/megapose6d/local_data/examples/barbecue-sauce/meshes/barbecue-sauce/hope_000002.ply
+:display(error): Could not get requested FrameBufferProperties; abandoning window.
+  requested: depth_bits=1 color_bits=3 red_bits=1 green_bits=1 blue_bits=1 alpha_bits=1 multisamples=4 back_buffers=1 force_hardware 
+  got: depth_bits=24 color_bits=24 red_bits=8 green_bits=8 blue_bits=8 alpha_bits=8 accum_bits=64 force_hardware 
+Process Process-3:
+Traceback (most recent call last):
+  File "C:\Users\temba\miniconda3\envs\mpose\lib\multiprocessing\process.py", line 315, in _bootstrap
+    self.run()
+  File "C:\Users\temba\miniconda3\envs\mpose\lib\multiprocessing\process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\temba\dev\megapose6d\src\megapose\panda3d_renderer\panda3d_batch_renderer.py", line 120, in worker_loop
+    renderings = renderer.render_scene(
+  File "C:\Users\temba\dev\megapose6d\src\megapose\panda3d_renderer\panda3d_scene_renderer.py", line 317, in render_scene
+    cameras = self.setup_cameras(root_node, camera_datas)
+  File "C:\Users\temba\dev\megapose6d\src\megapose\panda3d_renderer\panda3d_scene_renderer.py", line 245, in setup_cameras
+    cameras = self.get_cameras(data_cameras)
+  File "C:\Users\temba\dev\megapose6d\src\megapose\panda3d_renderer\panda3d_scene_renderer.py", line 187, in get_cameras
+    self.create_new_camera(resolution_)
+  File "C:\Users\temba\dev\megapose6d\src\megapose\panda3d_renderer\panda3d_scene_renderer.py", line 175, in create_new_camera
+    cam = Panda3dCamera.create(f"camera={idx}", resolution=resolution, app=self._app)
+  File "C:\Users\temba\dev\megapose6d\src\megapose\panda3d_renderer\types.py", line 180, in create
+    graphics_buffer.addRenderTexture(
+AttributeError: 'NoneType' object has no attribute 'addRenderTexture'
+MKL_NUM_THREADS: 1
+OMP_NUM_THREADS: 1
+CUDA_VISIBLE_DEVICES: 0
+EGL_VISIBLE_DEVICES: 0
+MESH:  /c/Users/temba/dev/megapose6d/local_data/examples/barbecue-sauce/meshes/barbecue-sauce/hope_000002.ply /c/Users/temba/dev/megapose6d/local_data/examples/barbecue-sauce/meshes/barbecue-sauce/hope_000002.ply

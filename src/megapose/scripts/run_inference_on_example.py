@@ -7,7 +7,8 @@ from typing import List, Tuple, Union
 
 # Third Party
 import numpy as np
-from bokeh.io import export_png
+from bokeh.io import export_png, save
+from bokeh.resources import INLINE
 from bokeh.plotting import gridplot
 from PIL import Image
 
@@ -101,7 +102,11 @@ def make_detections_visualization(
     fig_det = plotter.plot_detections(fig_rgb, detections=detections)
     output_fn = example_dir / "visualizations" / "detections.png"
     output_fn.parent.mkdir(exist_ok=True)
-    export_png(fig_det, filename=output_fn)
+    
+    ############################### MOD ################################
+    # export_png(fig_det, filename=output_fn)
+    save(fig_det, filename=output_fn, resources=INLINE, title="detections")
+
     logger.info(f"Wrote detections visualization: {output_fn}")
     return
 
@@ -187,9 +192,16 @@ def make_output_visualization(
     fig_all = gridplot([[fig_rgb, fig_contour_overlay, fig_mesh_overlay]], toolbar_location=None)
     vis_dir = example_dir / "visualizations"
     vis_dir.mkdir(exist_ok=True)
-    export_png(fig_mesh_overlay, filename=vis_dir / "mesh_overlay.png")
-    export_png(fig_contour_overlay, filename=vis_dir / "contour_overlay.png")
-    export_png(fig_all, filename=vis_dir / "all_results.png")
+
+    ############################### MOD ################################
+    # export_png(fig_mesh_overlay, filename=vis_dir / "mesh_overlay.png")
+    # export_png(fig_contour_overlay, filename=vis_dir / "contour_overlay.png")
+    # export_png(fig_all, filename=vis_dir / "all_results.png")
+    
+    save(fig_mesh_overlay, filename=str(vis_dir / "mesh_overlay.html"), resources=INLINE, title="mesh_overlay")
+    save(fig_contour_overlay, filename=str(vis_dir / "contour_overlay.html"), resources=INLINE, title="contour_overlay")
+    # save(fig_all, filename=str(vis_dir / "all_results.html"), resources=INLINE, title="all_results")
+
     logger.info(f"Wrote visualizations to {vis_dir}.")
     return
 

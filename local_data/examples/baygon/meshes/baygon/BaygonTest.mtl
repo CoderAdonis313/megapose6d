@@ -1,0 +1,12 @@
+# Blender 4.5.2 LTS MTL File: 'BaygonProper.blend'
+# www.blender.org
+
+newmtl Material.001
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 1
+map_Kd textures/bfd14feed4976e5b89515dd1619ce34b.jpg
+map_Ns textures/4d8675ae813bbf5fedc207d5aeea1676.jpg

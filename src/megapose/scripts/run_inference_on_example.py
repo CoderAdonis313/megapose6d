@@ -10,7 +10,7 @@ import numpy as np
 from bokeh.io import export_png, save
 from bokeh.resources import INLINE
 from bokeh.plotting import gridplot
-from PIL import Image
+from PIL import Image, ImageDraw, ImageFont
 
 # MegaPose
 from megapose.config import LOCAL_DATA_DIR
@@ -40,12 +40,12 @@ def load_observation(
 ) -> Tuple[np.ndarray, Union[None, np.ndarray], CameraData]:
     camera_data = CameraData.from_json((example_dir / "camera_data.json").read_text())
 
-    rgb = np.array(Image.open(example_dir / "image_rgb.png"), dtype=np.uint8)
+    rgb = np.array(Image.open(example_dir / "image_rgb.png").convert('RGB'), dtype=np.uint8)
     assert rgb.shape[:2] == camera_data.resolution
 
     depth = None
     if load_depth:
-        depth = np.array(Image.open(example_dir / "image_depth.png"), dtype=np.float32) / 1000
+        depth = np.array(Image.open(example_dir / "image_depth.png").convert('RGB'), dtype=np.float32) / 1000
         assert depth.shape[:2] == camera_data.resolution
 
     return rgb, depth, camera_data
@@ -76,7 +76,8 @@ def load_detections(
 
 def make_object_dataset(example_dir: Path) -> RigidObjectDataset:
     rigid_objects = []
-    mesh_units = "mm"
+    mesh_units = "m"
+    # mesh_units = "mm"
     object_dirs = (example_dir / "meshes").iterdir()
     for object_dir in object_dirs:
         label = object_dir.name
@@ -161,7 +162,7 @@ def make_output_visualization(
     camera_data.TWC = Transform(np.eye(4))
     object_datas = load_object_data(example_dir / "outputs" / "object_data.json")
     object_dataset = make_object_dataset(example_dir)
-
+    fig_axis = draw_triaxis(rgb, object_datas, camera_data.K) # type: ignore
     renderer = Panda3dSceneRenderer(object_dataset)
 
     camera_data, object_datas = convert_scene_observation_to_panda3d(camera_data, object_datas)
@@ -193,13 +194,18 @@ def make_output_visualization(
     vis_dir = example_dir / "visualizations"
     vis_dir.mkdir(exist_ok=True)
 
+    fig_axis = plotter.plot_image(fig_axis)
+
+
     ############################### MOD ################################
     # export_png(fig_mesh_overlay, filename=vis_dir / "mesh_overlay.png")
     # export_png(fig_contour_overlay, filename=vis_dir / "contour_overlay.png")
     # export_png(fig_all, filename=vis_dir / "all_results.png")
-    
+    # export_png(fig_axis, filename=vis_dir / "axis.png") 
+
     save(fig_mesh_overlay, filename=str(vis_dir / "mesh_overlay.html"), resources=INLINE, title="mesh_overlay")
     save(fig_contour_overlay, filename=str(vis_dir / "contour_overlay.html"), resources=INLINE, title="contour_overlay")
+    save(fig_axis, filename=str(vis_dir / "axis.html"), resources=INLINE, title="axis")
     # save(fig_all, filename=str(vis_dir / "all_results.html"), resources=INLINE, title="all_results")
 
     logger.info(f"Wrote visualizations to {vis_dir}.")
@@ -216,6 +222,84 @@ def make_output_visualization(
 
 # def run_inference(example_dir, use_depth: bool = False):
 #     return
+
+
+# projection helper
+def project_point(p3, K):
+    x, y, z = float(p3[0]), float(p3[1]), float(p3[2])
+    if z == 0:
+        return None
+    uv = K @ np.array([x, y, z], dtype=float)
+    u = float(uv[0]) / float(uv[2])
+    v = float(uv[1]) / float(uv[2])
+    return int(round(u)), int(round(v))
+
+
+def draw_triaxis(oimg: np.ndarray, datas, K: np.ndarray):
+    img = None
+    oimg_copy = Image.fromarray(oimg)
+
+    for pos_data in datas:
+        if pos_data.TWO is not None:
+            # print('POS_DATA', pos_data.TWO)
+            # R, t = pos_data.TWO
+            T = pos_data.TWO.toHomogeneousMatrix()
+            R = T[:3, :3].astype(float)
+            t = T[:3, 3].astype(float)  
+    
+            # axis endpoints in camera frame (object axes transformed by R then translated by t)
+            axis_length = 0.05
+            axis_thickness = 3
+            text_color=(255, 255, 0)
+
+            axes_obj = np.array([[axis_length, 0.0, 0.0], [0.0, axis_length, 0.0], [0.0, 0.0, axis_length]])
+            endpoints_cam = (R @ axes_obj.T).T + t.reshape(1, 3)  # (3,3)
+
+            origin_pix = project_point(t, K)
+            endpoints_pix = [project_point(endp, K) for endp in endpoints_cam]
+
+            # Prepare PIL image and draw
+            draw = ImageDraw.Draw(oimg_copy)
+
+            # Choose a simple font (fallback if not available)
+            try:
+                font = ImageFont.load_default()
+            except Exception:
+                font = None
+
+            # Colors for axes: X=red, Y=green, Z=blue
+            axis_colors = [(255, 0, 0), (0, 255, 0), (0, 0, 255)]
+
+            h, w = oimg.shape[:2]
+
+            # Draw axes if points are in front of camera and project inside image
+            if origin_pix is not None:
+                ox, oy = origin_pix
+                # draw small circle at origin
+                r = max(2, axis_thickness)
+                draw.ellipse([ox - r, oy - r, ox + r, oy + r], outline=(255, 255, 255), width=1)
+
+                for (end_pix, col) in zip(endpoints_pix, axis_colors):
+                    if end_pix is None:
+                        continue
+                    ex, ey = end_pix
+                    # optionally clip coordinates to image bounds (still draw partial lines)
+                    draw.line([ox, oy, ex, ey], fill=col, width=axis_thickness)
+
+                # Compose coordinate text near the origin (in metres, 3 decimals)
+                text = f"x={t[0]:.3f} m\ny={t[1]:.3f} m\nz={t[2]:.3f} m"
+                # choose text position offset (try to put it right of origin, inside image)
+                tx = ox + 8
+                ty = oy - 8
+                # if right side would be out of image, move left
+                if tx + 120 > w:
+                    tx = ox - 120
+                if ty < 0:
+                    ty = 0
+                draw.multiline_text((tx, ty), text, fill=text_color, font=font, align="left")
+
+    return np.array(oimg_copy)
+
 
 
 if __name__ == "__main__":

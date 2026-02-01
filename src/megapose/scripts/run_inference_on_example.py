@@ -101,10 +101,10 @@ def make_detections_visualization(
     plotter = BokehPlotter()
     fig_rgb = plotter.plot_image(rgb)
     fig_det = plotter.plot_detections(fig_rgb, detections=detections)
-    output_fn = example_dir / "visualizations" / "detections.png"
-    output_fn.parent.mkdir(exist_ok=True)
     
     ############################### MOD ################################
+    output_fn = example_dir / "visualizations" / "detections.html"
+    output_fn.parent.mkdir(exist_ok=True)
     # export_png(fig_det, filename=output_fn)
     save(fig_det, filename=output_fn, resources=INLINE, title="detections")
 

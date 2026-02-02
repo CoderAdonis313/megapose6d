@@ -1,0 +1,38 @@
+{
+    "camera": "camera 2, facing back",
+    "platform": "Linux; Android 10; K",
+    "avg_reprojection_error": 0.27748701519187136,
+    "camera_matrix": [
+        [
+            776.6102118946917,
+            0,
+            960.9206082479203
+        ],
+        [
+            0,
+            776.2092340226343,
+            535.9737758945978
+        ],
+        [
+            0,
+            0,
+            1
+        ]
+    ],
+    "distortion_coefficients": [
+        -0.008399615064399872,
+        0.02588229922955084,
+        0.00006256748744053635,
+        -0.0006098483391623315,
+        -0.015583848489360728
+    ],
+    "distortion_model": "rectilinear",
+    "img_size": [
+        1920,
+        1080
+    ],
+    "calibration_time": "Thu, 09 Oct 2025 08:18:49 GMT",
+    "caveats": [
+        "upscaled"
+    ]
+}

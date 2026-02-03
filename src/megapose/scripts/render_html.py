@@ -21,14 +21,14 @@ def find_firefox() -> str:
     return firefox
 
 
-def html_to_png_firefox(firefox_path: str, html_path: Path, png_path: Path, timeout: int = 30) -> None:
+def html_to_png_firefox(firefox_path: str, html_path: Path, png_path: Path, img_size: str, timeout: int = 30) -> None:
     # Firefox screenshots the rendered page (viewport). Output path must end with .png.
     url = file_url(html_path)
     cmd = [
         firefox_path,
         "--headless",
         "--screenshot",
-        "--window-size=720,1280",
+        f"--window-size={img_size}",
         str(png_path),
         url,
     ]
@@ -39,6 +39,7 @@ def main():
     ap = argparse.ArgumentParser(description="Convert all .html/.htm files in a folder to .png using Firefox headless.")
     ap.add_argument("folder", help="Folder containing .html files")
     ap.add_argument("--timeout", type=int, default=30, help="Per-file timeout in seconds (default: 30)")
+    ap.add_argument("--size", type=str, default="720,1280", help="default size: 720,1280")
     args = ap.parse_args()
 
     folder = Path(args.folder).expanduser().resolve()
@@ -55,14 +56,11 @@ def main():
     for html in html_files:
         png = html.with_suffix(".png")
         try:
-            print(f"[firefox] {html.name} -> {png.name}")
-            html_to_png_firefox(firefox_path, html, png, timeout=args.timeout)
+            html_to_png_firefox(firefox_path, html, png, timeout=args.timeout, img_size=args.size)
         except subprocess.TimeoutExpired:
             print(f"  ✗ Timeout: {html.name}")
         except subprocess.CalledProcessError as e:
             print(f"  ✗ Failed: {html.name} (exit={e.returncode})")
-
-    print("Done.")
 
 
 if __name__ == "__main__":

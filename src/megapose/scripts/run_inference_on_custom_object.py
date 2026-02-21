@@ -7,7 +7,7 @@ from typing import List, Tuple, Union
 
 # Third Party
 import numpy as np
-from bokeh.io import export_png, save
+from bokeh.io import save
 from bokeh.resources import INLINE
 from bokeh.plotting import gridplot
 from PIL import Image, ImageDraw, ImageFont
@@ -105,7 +105,6 @@ def make_detections_visualization(
     ############################### MOD ################################
     output_fn = example_dir / "visualizations" / "detections.html"
     output_fn.parent.mkdir(exist_ok=True)
-    # export_png(fig_det, filename=output_fn)
     save(fig_det, filename=output_fn, resources=INLINE, title="detections")
 
     logger.info(f"Wrote detections visualization: {output_fn}")
@@ -198,11 +197,6 @@ def make_output_visualization(
 
 
     ############################### MOD ################################
-    # export_png(fig_mesh_overlay, filename=vis_dir / "mesh_overlay.png")
-    # export_png(fig_contour_overlay, filename=vis_dir / "contour_overlay.png")
-    # export_png(fig_all, filename=vis_dir / "all_results.png")
-    # export_png(fig_axis, filename=vis_dir / "axis.png") 
-
     save(fig_mesh_overlay, filename=str(vis_dir / "mesh_overlay.html"), resources=INLINE, title="mesh_overlay")
     save(fig_contour_overlay, filename=str(vis_dir / "contour_overlay.html"), resources=INLINE, title="contour_overlay")
     save(fig_axis, filename=str(vis_dir / "axis.html"), resources=INLINE, title="axis")
@@ -287,7 +281,6 @@ def draw_triaxis(oimg: np.ndarray, datas, K: np.ndarray):
                 draw.multiline_text((tx, ty), text, fill=text_color, font=font, align="left")
 
     return np.array(oimg_copy)
-
 
 
 if __name__ == "__main__":

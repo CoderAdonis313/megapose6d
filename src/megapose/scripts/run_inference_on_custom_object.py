@@ -11,6 +11,7 @@ from bokeh.io import save
 from bokeh.resources import INLINE
 from bokeh.plotting import gridplot
 from PIL import Image, ImageDraw, ImageFont
+import cv2
 
 # MegaPose
 from megapose.config import LOCAL_DATA_DIR
@@ -217,70 +218,30 @@ def project_point(p3, K):
     return int(round(u)), int(round(v))
 
 
-def draw_triaxis(oimg: np.ndarray, datas, K: np.ndarray):
-    img = None
-    oimg_copy = Image.fromarray(oimg)
-
-    for pos_data in datas:
-        if pos_data.TWO is not None:
-            # print('POS_DATA', pos_data.TWO)
-            # R, t = pos_data.TWO
-            T = pos_data.TWO.toHomogeneousMatrix()
-            R = T[:3, :3].astype(float)
-            t = T[:3, 3].astype(float)  
+def draw_triaxis(oimg, datas, K):
     
-            # axis endpoints in camera frame (object axes transformed by R then translated by t)
-            axis_length = 0.05
-            axis_thickness = 3
-            text_color=(255, 255, 0)
+    if datas[0] is None:
+        return oimg
 
-            axes_obj = np.array([[axis_length, 0.0, 0.0], [0.0, axis_length, 0.0], [0.0, 0.0, axis_length]])
-            endpoints_cam = (R @ axes_obj.T).T + t.reshape(1, 3)  # (3,3)
+    T = datas[0].TWO 
+    H = T.toHomogeneousMatrix()
+    R = H[:3, :3].astype(float)
+    t = H[:3, 3].astype(float)
 
-            origin_pix = project_point(t, K)
-            endpoints_pix = [project_point(endp, K) for endp in endpoints_cam]
+    # Rodrigues rotation vector and translation vector for OpenCV
+    rvec, _ = cv2.Rodrigues(R)
+    tvec = t.reshape(3, 1)
 
-            # Prepare PIL image and draw
-            draw = ImageDraw.Draw(oimg_copy)
+    # Use zero distortion if you don't have distortion coefficients
+    dist = np.zeros((5, 1), dtype=float)
 
-            # Choose a simple font (fallback if not available)
-            try:
-                font = ImageFont.load_default()
-            except Exception:
-                font = None
+    # axis length in same units as your pose translation (adjust as needed)
+    axis_length = 0.1
 
-            # Colors for axes: X=red, Y=green, Z=blue
-            axis_colors = [(255, 0, 0), (0, 255, 0), (0, 0, 255)]
+    # drawFrameAxes modifies the image in-place
+    cv2.drawFrameAxes(oimg, K, dist, rvec, tvec, axis_length)
 
-            h, w = oimg.shape[:2]
-
-            # Draw axes if points are in front of camera and project inside image
-            if origin_pix is not None:
-                ox, oy = origin_pix
-                # draw small circle at origin
-                r = max(2, axis_thickness)
-                draw.ellipse([ox - r, oy - r, ox + r, oy + r], outline=(255, 255, 255), width=1)
-
-                for (end_pix, col) in zip(endpoints_pix, axis_colors):
-                    if end_pix is None:
-                        continue
-                    ex, ey = end_pix
-                    # optionally clip coordinates to image bounds (still draw partial lines)
-                    draw.line([ox, oy, ex, ey], fill=col, width=axis_thickness)
-
-                # Compose coordinate text near the origin (in metres, 3 decimals)
-                text = f"x={t[0]:.3f} m\ny={t[1]:.3f} m\nz={t[2]:.3f} m"
-                # choose text position offset (try to put it right of origin, inside image)
-                tx = ox + 8
-                ty = oy - 8
-                # if right side would be out of image, move left
-                if tx + 120 > w:
-                    tx = ox - 120
-                if ty < 0:
-                    ty = 0
-                draw.multiline_text((tx, ty), text, fill=text_color, font=font, align="left")
-
-    return np.array(oimg_copy)
+    return oimg
 
 
 if __name__ == "__main__":

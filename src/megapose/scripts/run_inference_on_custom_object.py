@@ -238,10 +238,12 @@ def draw_triaxis(oimg, datas, K):
     # axis length in same units as your pose translation (adjust as needed)
     axis_length = 0.1
 
-    # drawFrameAxes modifies the image in-place
-    cv2.drawFrameAxes(oimg, K, dist, rvec, tvec, axis_length)
+     # Convert RGB -> BGR before OpenCV drawing
+    img_bgr = cv2.cvtColor(oimg, cv2.COLOR_RGB2BGR)
+    cv2.drawFrameAxes(img_bgr, K, dist, rvec, tvec, axis_length)
 
-    return oimg
+    # Convert back BGR -> RGB for display
+    return cv2.cvtColor(img_bgr, cv2.COLOR_BGR2RGB)
 
 
 if __name__ == "__main__":

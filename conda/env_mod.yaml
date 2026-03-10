@@ -1,4 +1,4 @@
-name: mpose_pipe
+name: mpose
 channels:
    - conda-forge
    - pytorch

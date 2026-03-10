@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -e
 
 echo "Deleting outputs & visualizations folders"
 rm -rf local_data/examples/"${1:-baygon}"/outputs

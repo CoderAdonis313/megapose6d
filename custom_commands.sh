@@ -23,7 +23,7 @@ python -m megapose.scripts.run_inference_on_custom_object "${1:-baygon}" --vis-o
 echo "Successful Visualizations"
 
 echo "Drawing images"
-python -m megapose.scripts.render_html "local_data/examples/${1:-baygon}/visualizations" --size "${2:-720,1280}"
+python -m megapose.scripts.render_html "local_data/examples/${1:-baygon}/visualizations" --size "${2:-1280,720}"
 rm -rf local_data/examples/"${1:-baygon}"/visualizations/*.html
 echo "Successful Drawing"
 

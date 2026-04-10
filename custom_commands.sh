@@ -13,7 +13,7 @@ sleep 1
 
 echo "Running inference" 
 export PYTORCH_CUDA_ALLOC_CONF=max_split_size_mb:64
-python -m megapose.scripts.run_inference_on_custom_object "${1:-baygon}" --run-inference --model megapose-1.0-RGB
+python -m megapose.scripts.run_inference_on_custom_object "${1:-baygon}" --run-inference --model megapose-1.0-RGB-multi-hypothesis
 echo "Successful inference"
 
 sleep 1

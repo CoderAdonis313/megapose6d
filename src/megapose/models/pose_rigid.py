@@ -213,7 +213,9 @@ class PosePredictor(nn.Module):
         assert TCO.shape == (bsz, 4, 4)
         assert len(labels) == bsz
         meshes = self.mesh_db.select(labels)
-        points = meshes.sample_points(2000, deterministic=True)
+        # Original was 2000
+        N_POINTS = 1000
+        points = meshes.sample_points(N_POINTS, deterministic=True)
 
         uv = project_points_robust(points, K, TCO)
         boxes_rend = boxes_from_uv(uv)

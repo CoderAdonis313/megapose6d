@@ -23,3 +23,6 @@ tmp/
 tests.sh
 *.sif
 log_outputs/
+
+.vscode/
+.vscode/settings.json
